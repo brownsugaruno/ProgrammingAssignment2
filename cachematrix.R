@@ -1,8 +1,8 @@
-## My function creates a cachable inverse matrix, in order to conduct less resource
-## demanding calculations in a faster manner.
+## My functions create a cachable inverse matrix, in order to conduct the calculations
+## in a faster manner, saving on time using R functions to cache the computations.
 
-## This function creates the 'skeleton' or structure of the inverse matrix that
-## is to be specified by the next function.
+## This function creates a special "matrix" which is a list containing a function to
+## set and get the value of the matrix, and set and get the value of its inverse.
 
 makeCacheMatrix <- function(x = matrix()) {
   m <- NULL
@@ -20,8 +20,10 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## This specifies the cachable inverse matrix function and returns the
-## inverse matrix.
+## The following function calculates the inverse of the special "matrix" created above.
+## It first checks if the inverse has already been calculated, and if yes, it retrieves the answer from cache.
+## If it has not been computed yet, it calculates the inverse and sets the value of the inverse in the cache with the 
+## setsolve function.
 
 cacheSolve <- function(x, ...) {
   m <- x$getsolve()
@@ -33,3 +35,4 @@ cacheSolve <- function(x, ...) {
   m <- solve(data, ...)
   x$setsolve(m)
   m
+}
